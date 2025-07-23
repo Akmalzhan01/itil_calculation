@@ -5,7 +5,7 @@ import { IoBarChartOutline } from "react-icons/io5";
 import logo from "./assets/logo.png";
 import InCome from "./pages/InCome";
 import Stats from "./pages/Stats";
-import Сonsumption from "./pages/Сonsumption"
+import Сonsumption from "./pages/Сonsumption";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("home");
@@ -35,7 +35,6 @@ export default function App() {
         )}
         {activeTab === "favorites" && (
           <div>
-            <h2 className="text-lg font-semibold mb-4">Расход</h2>
             <Сonsumption />
           </div>
         )}
