@@ -19,7 +19,6 @@ function Сonsumption() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(data);
 
   return (
     <div className="flex flex-col w-full">
