@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 // get by id
 router.get("/:id", async (req, res) => {
   try {
-    const consumption = await Consumption.findById({id: req.params.id})
+    const consumption = await Consumption.findById({_id: req.params.id})
     res.json(consumption)
   } catch (error) {
     res.json(error)

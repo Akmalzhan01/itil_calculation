@@ -25,11 +25,11 @@ function Сonsumption() {
     fetchData();
   }, []);
 
-  const consumptionDetail = (id) => {
+  const consumptionDetail = async (id) => {
     console.log(id);
     try {
-      axios
-        .get("https://itil-calculation.vercel.app/api/" + id)
+     await axios
+        .get("https://itil-calculation.vercel.app/api/consumption/" + id)
         .then((success) => setConsumptionDetailed(success));
     } catch (error) {
       console.log(error);
