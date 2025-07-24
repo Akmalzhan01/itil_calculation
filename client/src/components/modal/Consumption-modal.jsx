@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import axios from "axios";
 import moment from "moment";
+import { ConsumptionApi } from "../../utils/apis";
 
 function ConsumptionModal({ setIsModalOpen }) {
   const [description, setDescription] = useState("");
@@ -31,15 +31,11 @@ function ConsumptionModal({ setIsModalOpen }) {
     }
 
     try {
-      const response = await axios.post(
-        "https://itil-calculation.vercel.app/app/api/consumption",
-        {
-          description,
-          value: Number(value),
-          date: formattedDate
-        }
-      );
-      console.log(response.data);
+      await ConsumptionApi.addConsumption({
+        description,
+        value: Number(value),
+        date: formattedDate
+      });
       setIsModalOpen(false);
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);

@@ -13,6 +13,16 @@ router.get("/", async (req, res) => {
   }
 })
 
+// get by id
+router.get("/:id", async (req, res) => {
+  try {
+    const consumption = await Consumption.findById({id: req.params.id})
+    res.json(consumption)
+  } catch (error) {
+    res.json(error)
+  }
+})
+
 // get by month
 router.get("/:year/:month", async (req, res) => {
   try {

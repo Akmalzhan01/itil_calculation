@@ -1,8 +1,14 @@
 import mongoose, { model } from "mongoose";
 
 const consumptionSchema = mongoose.Schema({
-  description: String,
-  value: Number,
+  description: {
+    type: String,
+    required: true
+  },
+  value: {
+    type: Number,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
