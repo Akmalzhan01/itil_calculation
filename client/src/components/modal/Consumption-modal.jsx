@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 import moment from "moment";
 import { ConsumptionApi } from "../../utils/apis";
 
-function ConsumptionModal({ setIsModalOpen }) {
+function ConsumptionModal({ setIsModalOpen  }) {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState(0);
   const [datew, setDatew] = useState("");
@@ -55,7 +55,9 @@ function ConsumptionModal({ setIsModalOpen }) {
         onSubmit={handleAdd}
         className="mt-24 py-6 border border-white rounded-xl w-10/12 flex flex-col items-center"
       >
+        <div className="flex">
         <h2 className="font-bold text-xl">Добавить расход</h2>
+        </div>
         <div className="w-full border mt-5"></div>
         <div className="w-full flex flex-col justify-center items-center">
           <label className="mt-6 w-10/12 flex flex-col">

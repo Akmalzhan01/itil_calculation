@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import consumption from "./controller/consumption.control.js"
+import income from "./controller/income.control.js"
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors({
 }));
 
 app.use("/api/consumption", consumption)
+app.use("/api/income", income)
 
 
 function start() {

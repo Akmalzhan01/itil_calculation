@@ -5,12 +5,14 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { ConsumptionApi } from "../utils/apis";
 import ConsumptionDetail from "../components/detail/Consumption-detail";
 import axios from "axios";
+import ConsumtionEdit from "../components/edit/Consumtion-edit";
 
 function Сonsumption() {
   const [data, setData] = useState([]);
   const [consumptionDetailed, setConsumptionDetailed] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [isEditConsumption, setIsEditConsumption] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,16 +30,16 @@ function Сonsumption() {
   const consumptionDetail = async (id) => {
     console.log(id);
     try {
-     await axios
+      await axios
         .get("https://itil-calculation.vercel.app/api/consumption/" + id)
-        .then((success) => setConsumptionDetailed(success));
+        .then((success) => {
+          setConsumptionDetailed(success.data);
+          setIsDetailOpen(true);
+        });
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(consumptionDetailed);
-  
 
   return (
     <div className="flex flex-col w-full">
@@ -66,17 +68,32 @@ function Сonsumption() {
           </div>
         ))}
       </div>
+
+      {/* edit oyna */}
+      {isEditConsumption && (
+        <ConsumtionEdit
+          consumptionDetailed={consumptionDetailed}
+          setConsumptionDetailed={setConsumptionDetailed}
+          setIsEditConsumption={setIsEditConsumption}
+          isEditConsumption={isEditConsumption}
+        />
+      )}
+
       {/* Detail oyna */}
       {isDetailOpen && (
         <ConsumptionDetail
           isDetailOpen={isDetailOpen}
           setIsDetailOpen={setIsDetailOpen}
+          consumptionDetailed={consumptionDetailed}
+          setConsumptionDetailed={setConsumptionDetailed}
+          setIsEditConsumption={setIsEditConsumption}
+          setIsModalOpen={setIsModalOpen}
         />
       )}
 
       {/* Modal Oyna */}
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} consumptionDetailed={consumptionDetailed} setConsumptionDetailed={setConsumptionDetailed} />
       )}
     </div>
   );
