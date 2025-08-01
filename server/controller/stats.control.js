@@ -21,7 +21,7 @@ router.get("/:year/:month", async (req, res) => {
     }
 
     // MongoDB aggregation yordamida yig'indi hisoblash
-    const result = await consumptionModel.aggregate([
+    const resultConsumption = await consumptionModel.aggregate([
       {
         $match: {
           $expr: {
@@ -41,16 +41,31 @@ router.get("/:year/:month", async (req, res) => {
       }
     ]);
 
-    const response = result.length > 0 
-      ? { 
-          success: true,
-          totalConsumption: result[0].totalConsumption
+    const resultIncome = await incomeModel.aggregate([
+      {
+        $match: {
+          $expr: {
+            $and: [
+              { $eq: [{ $year: "$date" }, yearNum] },
+              { $eq: [{ $month: "$date" }, monthNum] }
+            ]
+          }
         }
-      : { 
-          success: true,
-          totalConsumption: 0,
-          records: []
-        };
+      },
+      {
+        $group: {
+          _id: null,
+          totalIncome: { $sum: "$value" },
+          records: { $push: "$$ROOT" }
+        }
+      }
+    ]);
+
+    const response = { 
+          totalConsumption: resultConsumption[0]?.totalConsumption,
+          totalIncome: resultIncome[0]?.totalIncome,
+          totalSum: resultIncome[0]?.totalIncome - resultConsumption[0]?.totalConsumption
+        }
 
     res.json(response);
     
