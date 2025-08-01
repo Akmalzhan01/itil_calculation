@@ -22,7 +22,6 @@ export default function App() {
               path="/"
               element={
                 <div>
-                  <h2 className="text-lg font-semibold mb-4">Статистика</h2>
                   <Stats />
                 </div>
               }

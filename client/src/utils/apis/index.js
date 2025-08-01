@@ -14,4 +14,6 @@ export const ConsumptionApi = {
   updateIncome: (id, data) => apiClient.put(`${API_ENDPOINTS.INCOME}/${id}`, data),
   deleteIncome: (id) => apiClient.delete(`${API_ENDPOINTS.INCOME}/${id}`),
   
+  // 
+  getStats: (year, month) => apiClient.get(`${API_ENDPOINTS.STATS}/${year}/${month}`)
 };
