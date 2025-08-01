@@ -23,31 +23,7 @@ router.get("/:id", async (req, res) => {
   }
 })
 
-// get by month
-router.get("/:year/:month", async (req, res) => {
-  try {
-    const {year, month} = await req.params
-    
-    const income = await Income.find({
-      $expr: {
-        $and: [
-          { $eq: [{ $year: "$date" }, parseInt(year)] },
-          { $eq: [{ $month: "$date" }, parseInt(month)] }
-        ]
-      }
-    }).select("value");
 
-    const totalIncome = income.reduce((sum, value) => {
-      return sum + (value.value);
-    }, 0);
-
-
-    res.json(totalIncome)
-    
-  } catch (error) {
-    res.json(error)
-  }
-})
 
 // create
 router.post("/", async (req, res) => {

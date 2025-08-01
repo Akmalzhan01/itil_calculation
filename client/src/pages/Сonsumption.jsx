@@ -28,7 +28,6 @@ function Сonsumption() {
   }, []);
 
   const consumptionDetail = async (id) => {
-    console.log(id);
     try {
       await axios
         .get("https://itil-calculation.vercel.app/api/consumption/" + id)

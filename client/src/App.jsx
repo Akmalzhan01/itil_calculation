@@ -31,7 +31,6 @@ export default function App() {
               path="/income"
               element={
                 <div>
-                  <h2 className="text-lg font-semibold mb-4">Приход</h2>
                   <InCome />
                 </div>
               }

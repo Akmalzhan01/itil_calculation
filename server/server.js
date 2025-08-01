@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 import consumption from "./controller/consumption.control.js"
 import income from "./controller/income.control.js"
+import stats from "./controller/stats.control.js"
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors({
 
 app.use("/api/consumption", consumption)
 app.use("/api/income", income)
+app.use("/api/stats", stats)
 
 
 function start() {
